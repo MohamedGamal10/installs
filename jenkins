@@ -2,3 +2,17 @@ docker run -p 8080:8080 -p 50000:50000 -d \                                     
 -v jenkins_home:/var/jenkins_home \
 -v /var/run/docker.sock:/var/run/docker.sock \
 -v $(which docker):/usr/bin/docker jenkins/jenkins:jdk21
+
+
+#then
+#on host  : 
+  getent group docker -> docker:x:999:your_username
+  sudo chmod 660 /var/run/docker.sock
+
+docker exec -u root -it jenkins /bin/bash 
+  groupadd -g 999 docker
+  usermod -aG docker jenkins
+  chown -R jenkins:jenkins /var/jenkins_home
+  chmod -R 775 /var/jenkins_home
+
+docker restart jenkins
