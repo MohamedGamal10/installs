@@ -16,3 +16,8 @@ docker exec -u root -it jenkins /bin/bash
   chmod -R 775 /var/jenkins_home
 
 docker restart jenkins
+
+#install python :
+apt-get update
+apt-get install -y python3 python3-pip
+apt-get install -y python3-venv
